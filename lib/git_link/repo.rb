@@ -8,6 +8,7 @@ module GitLink
     }
 
     attr_reader :name, :url, :options
+    attr_writer :updated
 
     def initialize name, opts={}
       raise "Must provide a URL for the GitLinked repo #{name}" unless opts.has_key?(:url)
@@ -15,6 +16,7 @@ module GitLink
       @name    = name
       @url     = opts.delete(:url)
       @options = DEFAULT_OPTIONS.merge(opts)
+      @updated = false
 
       ensure_dir
     end
@@ -26,15 +28,18 @@ module GitLink
     def create!
       git_clone
       git_checkout
+      updated = true
     end
 
     def update!
+      rev = git_rev
       git_checkout
       git_pull
+      updated = true if rev != git_rev
     end
 
     def build!
-      if options[:build]
+      if options[:build] and updated
         Dir.chdir path do
           Cocaine::CommandLine.new(options[:build]).run
         end
@@ -72,6 +77,12 @@ module GitLink
     def git_pull
       Dir.chdir path do
         Cocaine::CommandLine.new('git', 'pull', 'origin', ':branch').run branch: options[:branch]
+      end
+    end
+
+    def git_rev
+      Dir.chdir path do
+        Cocaine::CommandLine.new('git', 'rev-parse', 'HEAD').run
       end
     end
   end
