@@ -40,9 +40,7 @@ In your Rakefile use the following:
 
 This will create the task:
 
-```bash
-  rake build:name_of_thing
-```
+    $ rake build:name_of_thing
 
 This will automatically clone your repo or update it if it exists.
 It will then run your build command, if any.
