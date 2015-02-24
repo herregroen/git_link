@@ -15,7 +15,7 @@ module GitLink
     def initialize name, opts={}
       raise "Must provide a URL for the GitLinked repo #{name}" unless opts.has_key?(:url)
 
-      @name    = name
+      @name    = name.to_s
       @url     = opts.delete(:url)
       @options = DEFAULT_OPTIONS.merge(opts)
       @updated = false
