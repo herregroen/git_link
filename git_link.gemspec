@@ -8,8 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = GitLink::VERSION
   spec.authors       = ["Herre Groen"]
   spec.email         = ["herregroen@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Clones, updates, builds and symlinks git repositories.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
