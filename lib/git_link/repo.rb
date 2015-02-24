@@ -9,8 +9,8 @@ module GitLink
       build:  false
     }
 
-    attr_reader :name, :url, :options
-    attr_writer :updated
+    attr_reader   :name, :url, :options
+    attr_accessor :updated
 
     def initialize name, opts={}
       raise "Must provide a URL for the GitLinked repo #{name}" unless opts.has_key?(:url)
