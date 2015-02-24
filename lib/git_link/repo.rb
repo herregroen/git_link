@@ -50,7 +50,14 @@ module GitLink
 
     def link!
       options[:links].each do |from, to|
-        File.symlink "#{path}/#{from}", to  unless File.exists?(to) or File.symlink?(to)
+        if File.exists?(to) or File.symlink?(to)
+          if File.readlink(to) == "#{path}/#{from}"
+            next
+          else
+            File.delete(to)
+          end
+        end
+        File.symlink "#{path}/#{from}", to
       end
     end
 
@@ -102,7 +109,7 @@ module GitLink
 
     def remove_links
       options[:links].each do |from, to|
-        Cocaine::CommandLine.new('rm', ':link').run link: to
+        File.delete(to)
       end
     end
 
