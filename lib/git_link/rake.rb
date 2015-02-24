@@ -8,7 +8,7 @@ module Gitlink
       desc "Builds and links the #{name} repository."
       task "build:#{name}" do
         repo = Repo.new name, config
-        if repo.exists? then repo.update! else repo.create!
+        if repo.exists? then repo.update! else repo.create! end
         repo.build!
         repo.link!
       end
