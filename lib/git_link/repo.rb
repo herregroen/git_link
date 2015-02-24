@@ -54,6 +54,11 @@ module GitLink
       end
     end
 
+    def clean!
+      remove_links
+      remove_repo
+    end
+
     private
 
     def path
@@ -86,6 +91,16 @@ module GitLink
       Dir.chdir path do
         Cocaine::CommandLine.new('git', 'rev-parse HEAD').run
       end
+    end
+
+    def remove_links
+      options[:links].each do |from, to|
+        Cocaine::CommandLine.new('rm', ':link').run link: to
+      end
+    end
+
+    def remove_repo
+      Cocaine::CommandLine.new('rm', '-rf :path').run path: path
     end
   end
 end

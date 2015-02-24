@@ -40,8 +40,14 @@ In your Rakefile use the following:
 
 This will create the task:
 
-    $ rake build:name_of_thing
+    $ rake name_of_thing:build
 
 This will automatically clone your repo or update it if it exists.
 It will then run your build command, if any.
 Then it will symlink the specified directories from the repo to your app.
+
+It will also create the task:
+
+    $ rake name_of_thing:clean
+
+Removing everything again.
