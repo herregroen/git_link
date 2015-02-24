@@ -40,7 +40,6 @@ module GitLink
     end
 
     def build!
-      puts options[:build], updated
       if options[:build] and updated
         Dir.chdir path do
           Cocaine::CommandLine.new(options[:build]).run
