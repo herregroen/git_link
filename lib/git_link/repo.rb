@@ -66,25 +66,25 @@ module GitLink
 
     def git_clone
       Dir.chdir options[:dir] do
-        Cocaine::CommandLine.new('git', 'clone', ':url', ':name').run url: url, name: name
+        Cocaine::CommandLine.new('git', 'clone :url :name').run url: url, name: name
       end
     end
 
     def git_checkout
       Dir.chdir path do
-        Cocaine::CommandLine.new('git', 'checkout', ':branch').run branch: options[:branch]
+        Cocaine::CommandLine.new('git', 'checkout :branch').run branch: options[:branch]
       end
     end
 
     def git_pull
       Dir.chdir path do
-        Cocaine::CommandLine.new('git', 'pull', 'origin', ':branch').run branch: options[:branch]
+        Cocaine::CommandLine.new('git', 'pull origin :branch').run branch: options[:branch]
       end
     end
 
     def git_rev
       Dir.chdir path do
-        Cocaine::CommandLine.new('git', 'rev-parse', 'HEAD').run
+        Cocaine::CommandLine.new('git', 'rev-parse HEAD').run
       end
     end
   end
