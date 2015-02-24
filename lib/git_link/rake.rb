@@ -1,3 +1,5 @@
+require 'rake'
+
 module GitLink
   module Rake
     extend ::Rake::DSL
