@@ -1,3 +1,5 @@
+require 'fileutils'
+
 module GitLink
   class Repo
     DEFAULT_OPTIONS = {
@@ -59,7 +61,7 @@ module GitLink
     end
 
     def ensure_dir
-      Dir.mkdir(path) unless Dir.exist?(path)
+      FileUtils.mkpath(options[:dir]) unless File.exists?(options[:dir])
     end
 
     def git_clone
