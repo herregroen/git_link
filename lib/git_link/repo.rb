@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'cocaine'
 
 module GitLink
   class Repo
