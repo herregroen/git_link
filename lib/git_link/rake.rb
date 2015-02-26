@@ -8,7 +8,7 @@ module GitLink
       config.keys.each { |key| config[key.to_sym] = config.delete(key) }
 
       desc "Builds and links the #{name} repository."
-      task "#{name}:build" do
+      task "gitlink:#{name}:build" do
         repo = Repo.new name, config
         if repo.exists? then repo.update! else repo.create! end
         repo.build!
@@ -16,7 +16,7 @@ module GitLink
       end
 
       desc "Removes the #{name} repository and all associated symlinks."
-      task "#{name}:clean" do
+      task "gitlink:#{name}:clean" do
         repo = Repo.new name, config
         repo.clean! if repo.exists?
       end
