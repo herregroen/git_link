@@ -50,14 +50,16 @@ module GitLink
 
     def link!
       options[:links].each do |from, to|
+        from = Pathname.new("#{path}/#{from}")
+        to   = Pathname.new(to)
         if File.exists?(to) or File.symlink?(to)
-          if File.readlink(to) == "#{path}/#{from}"
+          if File.readlink(to) == from
             next
           else
             File.delete(to)
           end
         end
-        File.symlink Pathname.new("#{path}/#{from}").relative_path_from(Pathname.new(to)), to
+        File.symlink from.relative_path_from(to.dirname), to
       end
     end
 
