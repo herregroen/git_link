@@ -57,7 +57,7 @@ module GitLink
             File.delete(to)
           end
         end
-        File.symlink "#{path}/#{from}", to
+        File.symlink Pathname.new("#{path}/#{from}").relative_path_from(to), to
       end
     end
 
