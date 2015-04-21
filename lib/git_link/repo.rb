@@ -105,7 +105,7 @@ module GitLink
     def git_rev
       Dir.chdir path do
         raise_if_not_git!
-        Cocaine::CommandLine.new('git', 'rev-parse HEAD').run
+        Cocaine::CommandLine.new('git', 'rev-parse HEAD').run.strip
       end
     end
 
